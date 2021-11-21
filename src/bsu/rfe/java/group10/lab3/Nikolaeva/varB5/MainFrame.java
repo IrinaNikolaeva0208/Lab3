@@ -145,7 +145,6 @@ public class MainFrame extends JFrame {
 					data = new GornerTableModel(from, to, step, MainFrame.this.coefficients);
 					JTable table = new JTable(data);
 					table.setDefaultRenderer(Double.class,renderer);
-					table.setDefaultRenderer(Boolean.class,renderer);
 					table.setRowHeight(30);
 					hBoxResult.removeAll();
 					hBoxResult.add(new JScrollPane(table));
@@ -197,8 +196,8 @@ public class MainFrame extends JFrame {
 			DataOutputStream out = new DataOutputStream(new
 			FileOutputStream(selectedFile));
 			for (int i = 0; i<data.getRowCount(); i++) {
-				out.writeDouble((Double)data.getValueAt(i,0));
-				out.writeDouble((Double)data.getValueAt(i,1));
+				out.writeDouble(Double.parseDouble(data.getValueAt(i,0).toString()));
+				out.writeDouble(Double.parseDouble(data.getValueAt(i,1).toString()));
 			}
 			out.close();
 		} catch (Exception e) {}
@@ -220,7 +219,7 @@ public class MainFrame extends JFrame {
 			data.getTo() + " с шагом " + data.getStep());
 			out.println("====================================================");
 			for (int i = 0; i<data.getRowCount(); i++) 
-				out.println("Значение многочлена при x = " + data.getValueAt(i,0) + ") равно " + data.getValueAt(i,1));
+				out.println("Значение многочлена при x = " + data.getValueAt(i,0).toString() + ") равно " + data.getValueAt(i,1).toString());
 			out.close();
 		} catch (FileNotFoundException e) {}
 	}

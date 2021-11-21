@@ -34,7 +34,7 @@
 			return new Double(Math.ceil((to-from)/step)).intValue()+1;
 		}
 		
-		public Double getValueAt(int row, int col) {
+		public Object getValueAt(int row, int col) {
 			double x = from + step*row;
 			double r = 0;
 			for (Double arg : coefficients) 
@@ -42,16 +42,17 @@
 			switch(col) {
 			case 0:
 				return x;
-			default:	
+			case 1:	
 				return r;
-			//default:
-				//boolean prime = 0;
-				//for (int i = 2; i < (int)Math.sqrt(r); i++)
-				//if ((int)r%i!=0) {
-					//prime = false;
-					//break;
-				//}
-				//return prime;
+			default:
+				if(r<2) return false;
+				boolean prime = true;
+				for (int i = 2; i < r/2; i++)
+				if ((int)r%i==0) {
+					prime = false;
+					break;
+				}
+				return prime;
 		}
 		}
 		
